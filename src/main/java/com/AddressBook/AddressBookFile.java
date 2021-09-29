@@ -20,7 +20,7 @@ public class AddressBookFile {
     public static void add_details_to_file(String input) {
         try {
             FileOutputStream fout = new FileOutputStream(address_book_file);
-            byte b[] = input.getBytes();
+            byte[] b = input.getBytes();
             fout.write(b);
             fout.close();
             System.out.println("\ncontact added successfully...");

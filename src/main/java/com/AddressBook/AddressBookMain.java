@@ -1,5 +1,9 @@
 package com.AddressBook;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,7 +19,7 @@ public class AddressBookMain {
 
     public static AddressBookMain function = new AddressBookMain();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
 
 
         char ans;
@@ -29,6 +33,8 @@ public class AddressBookMain {
             System.out.println("5.search by city or state and print...");
             System.out.println("6.search and print count of city and state...");
             System.out.println("7.view by sorted state or city or zip the contact...");
+            System.out.println("8.Read and write the contact details in text file");
+            System.out.println("9.Read and write the contact details in csv file");
 
 
             System.out.print("\n\n Enter the choice What you want to do: ");
@@ -90,15 +96,25 @@ public class AddressBookMain {
                     view_by_state_or_city_sorted();
                 }
                 break;
+
                 case 8: {
                     File_read_and_write();
                 }
                 break;
+
+                case 9: {
+                    CSVFile_Read_and_write();
+                }
             }
 
             System.out.println("\n Do you want to continue:(y or n) ");
             ans = scan.next().charAt(0);
         } while (ans == 'y');
+    }
+
+    private static void CSVFile_Read_and_write() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+        AddressBookCSVFile.createfile();
+        AddressBookCSVFile.write_csvfile();
     }
 
     private static void File_read_and_write() {
