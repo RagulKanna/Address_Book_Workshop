@@ -28,6 +28,7 @@ public class AddressBookMain {
             System.out.println("4.Display the contact in sorted order....");
             System.out.println("5.search by city or state and print...");
             System.out.println("6.search and print count of city and state...");
+            System.out.println("7.view by sorted state or city or zip the contact...");
 
 
             System.out.print("\n\n Enter the choice What you want to do: ");
@@ -85,12 +86,69 @@ public class AddressBookMain {
                 }
                 break;
 
-
+                case 7: {
+                    view_by_state_or_city_sorted();
+                }
+                break;
             }
 
             System.out.println("\n Do you want to continue:(y or n) ");
             ans = scan.next().charAt(0);
         } while (ans == 'y');
+    }
+
+    private static void view_by_state_or_city_sorted() {
+        System.out.println("\nBy which you what to search city or state or zip..");
+        String type = scan.next();
+        switch (type) {
+            case "state": {
+                List<Contact> sorted_by_state = contactList.stream()
+                        .sorted(Comparator.comparing(Contact::getState))
+                        .collect(Collectors.toList());
+                sorted_by_state.forEach(contact -> {
+                    System.out.println("\nFirstName - " + contact.getFirstname() +
+                            "\nLastname -  " + contact.getLastname() +
+                            "\nAddress -  " + contact.getAddress() +
+                            "\nCity -  " + contact.getCity() +
+                            "\nState -  " + contact.getState() +
+                            "\nZip -  " + contact.getZip() +
+                            "\nEmail -  " + contact.getEmail());
+                });
+            }
+            break;
+
+            case "city": {
+                List<Contact> sorted_by_state = contactList.stream()
+                        .sorted(Comparator.comparing(Contact::getCity))
+                        .collect(Collectors.toList());
+                sorted_by_state.forEach(contact -> {
+                    System.out.println("\nFirstName - " + contact.getFirstname() +
+                            "\nLastname -  " + contact.getLastname() +
+                            "\nAddress -  " + contact.getAddress() +
+                            "\nCity -  " + contact.getCity() +
+                            "\nState -  " + contact.getState() +
+                            "\nZip -  " + contact.getZip() +
+                            "\nEmail -  " + contact.getEmail());
+                });
+            }
+            break;
+
+            case "zip": {
+                List<Contact> sorted_by_state = contactList.stream()
+                        .sorted(Comparator.comparing(Contact::getZip))
+                        .collect(Collectors.toList());
+                sorted_by_state.forEach(contact -> {
+                    System.out.println("\nFirstName - " + contact.getFirstname() +
+                            "\nLastname -  " + contact.getLastname() +
+                            "\nAddress -  " + contact.getAddress() +
+                            "\nCity -  " + contact.getCity() +
+                            "\nState -  " + contact.getState() +
+                            "\nZip -  " + contact.getZip() +
+                            "\nEmail -  " + contact.getEmail());
+                });
+            }
+            break;
+        }
     }
 
 
