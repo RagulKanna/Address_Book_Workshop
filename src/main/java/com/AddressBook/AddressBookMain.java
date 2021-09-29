@@ -90,11 +90,23 @@ public class AddressBookMain {
                     view_by_state_or_city_sorted();
                 }
                 break;
+                case 8: {
+                    File_read_and_write();
+                }
+                break;
             }
 
             System.out.println("\n Do you want to continue:(y or n) ");
             ans = scan.next().charAt(0);
         } while (ans == 'y');
+    }
+
+    private static void File_read_and_write() {
+        AddressBookFile.createfile();
+        String input = contactList.toString();
+        AddressBookFile.add_details_to_file(input);
+        AddressBookFile.read_details_to_file();
+
     }
 
     private static void view_by_state_or_city_sorted() {
