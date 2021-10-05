@@ -35,6 +35,7 @@ public class AddressBookMain {
             System.out.println("7.view by sorted state or city or zip the contact...");
             System.out.println("8.Read and write the contact details in text file");
             System.out.println("9.Read and write the contact details in csv file");
+            System.out.println("10.Read and write the contact details in json file");
 
 
             System.out.print("\n\n Enter the choice What you want to do: ");
@@ -103,8 +104,14 @@ public class AddressBookMain {
                 break;
 
                 case 9: {
-                    CSVFile_Read_and_write();
-                }
+                    WriteCSVFile();
+                }break;
+
+                case 10:{
+                    JsonFile.jsonWrite();
+
+                }break;
+
             }
 
             System.out.println("\n Do you want to continue:(y or n) ");
@@ -112,7 +119,7 @@ public class AddressBookMain {
         } while (ans == 'y');
     }
 
-    private static void CSVFile_Read_and_write() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
+    private static void WriteCSVFile() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
         AddressBookCSVFile.createfile();
         AddressBookCSVFile.write_csvfile();
     }

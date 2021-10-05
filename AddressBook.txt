@@ -1,1 +1,1 @@
-[Contact{firstname='ragul', lastname='kanna', address='sad', city='dasd', state='da', zip=555, phonenumber=656, email='sad'}]
+[Contact{firstname='ragul', lastname='kanna', address='fasf', city='fsaf', state='fasf', zip=54564, phonenumber=5454, email='fasfa'}]

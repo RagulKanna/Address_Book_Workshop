@@ -1,15 +1,14 @@
 package com.AddressBook;
 
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
-import java.io.*;
-import java.util.Iterator;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddressBookCSVFile {
 
@@ -28,40 +27,26 @@ public class AddressBookCSVFile {
     public static void write_csvfile() throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 
         try {
-            FileWriter outputfile = new FileWriter(addressbook_csv);
-
-            StatefulBeanToCsv<Contact> beanToCsv = new StatefulBeanToCsvBuilder<Contact>(outputfile)
-                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-                    .build();
-            beanToCsv.write(AddressBookMain.contactList);
+            FileWriter outfile = new FileWriter(addressbook_csv);
+            CSVWriter csvwriter = new CSVWriter(outfile, ',',
+                    CSVWriter.NO_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END);
+            String[] header = {"Contact Name", "First Name", "Last Name", "Address", "City", "State", "Phone Number",
+                    "Email", "Zip"};
+            List<String[]> list = new ArrayList<>();
+            list.add(header);
+            AddressBookMain.contactList.forEach(contact -> {
+                String[] details = {contact.getFirstname(), contact.getLastname(),
+                        contact.getAddress(), contact.getCity(), contact.getState(),
+                        String.valueOf(contact.getPhonenumber()), contact.getEmail(),
+                        String.valueOf(contact.getZip())};
+                list.add(details);
+            });
+            csvwriter.writeAll(list);
+            csvwriter.flush();
 
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void read_csvfile() throws IOException {
-
-        try {
-            FileReader readfile = new FileReader(addressbook_csv);
-
-            CsvToBean<CSVUser> csvToBean = new CsvToBeanBuilder<CSVUser>(readfile)
-                    .withType(CSVUser.class)
-                    .build();
-
-            Iterator<CSVUser> csvUserIterator = csvToBean.iterator();
-
-            while (csvUserIterator.hasNext()) {
-                CSVUser csvUser = new csvUserIterator.next();
-                System.out.println("\nFirstName - " + csvUser.getFirstname() +
-                        "\nLastname -  " + csvUser.getLastname() +
-                        "\nAddress -  " + csvUser.getAddress() +
-                        "\nCity -  " + csvUser.getCity() +
-                        "\nState -  " + csvUser.getState() +
-                        "\nZip -  " + csvUser.getZip() +
-                        "\nEmail -  " + csvUser.getEmail());
-            }
-        } catch (FileNotFoundException | IllegalStateException e) {
             e.printStackTrace();
         }
     }
