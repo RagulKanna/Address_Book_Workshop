@@ -105,12 +105,14 @@ public class AddressBookMain {
 
                 case 9: {
                     WriteCSVFile();
-                }break;
+                }
+                break;
 
-                case 10:{
+                case 10: {
                     JsonFile.jsonWrite();
 
-                }break;
+                }
+                break;
 
             }
 
