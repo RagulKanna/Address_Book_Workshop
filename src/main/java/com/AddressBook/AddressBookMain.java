@@ -39,6 +39,7 @@ public class AddressBookMain {
             System.out.println("11.JDBC Connection and retrieve all data from database");
             System.out.println("12.Update data to database");
             System.out.println("13.get contact data between particular date from database");
+            System.out.println("14.get city or state with its count from database");
 
 
             System.out.print("\n\n Enter the choice What you want to do: ");
@@ -129,12 +130,24 @@ public class AddressBookMain {
                 case 13: {
                     getDataFromParticularPeriod();
                 }
+                break;
+
+                case 14: {
+                    getCountOfStateOrCity();
+                }
 
             }
 
             System.out.println("\n Do you want to continue:(y or n) ");
             ans = scan.next().charAt(0);
         } while (ans == 'y');
+    }
+
+    private static void getCountOfStateOrCity() {
+        System.out.println("Enter City or State");
+        String input = scan.next();
+        String sql = "select " + input + ",count(" + input + ") as count from contact group by " + input + ";";
+        AddressBookJDBC.getCountOfStateOrCity(sql, input);
     }
 
     private static void getDataFromParticularPeriod() {
