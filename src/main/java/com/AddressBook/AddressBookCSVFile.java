@@ -37,9 +37,9 @@ public class AddressBookCSVFile {
             List<String[]> list = new ArrayList<>();
             list.add(header);
             AddressBookMain.contactList.forEach(contact -> {
-                String[] details = {contact.getFirstname(), contact.getLastname(),
+                String[] details = {contact.getFirst_name(), contact.getLast_name(),
                         contact.getAddress(), contact.getCity(), contact.getState(),
-                        String.valueOf(contact.getPhonenumber()), contact.getEmail(),
+                        String.valueOf(contact.getPhone_number()), contact.getEmail(),
                         String.valueOf(contact.getZip())};
                 list.add(details);
             });

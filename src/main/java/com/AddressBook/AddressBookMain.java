@@ -13,7 +13,7 @@ public class AddressBookMain {
 
     public static Scanner scan = new Scanner(System.in);
 
-    public static String firstname, lastname, address, email, city, state;
+    public static String first_name, last_name, address, email, city, state;
     public static int zip;
     public static long phone_number;
 
@@ -36,6 +36,7 @@ public class AddressBookMain {
             System.out.println("8.Read and write the contact details in text file");
             System.out.println("9.Read and write the contact details in csv file");
             System.out.println("10.Read and write the contact details in json file");
+            System.out.println("11.JDBC Connection and retrieve all data from database");
 
 
             System.out.print("\n\n Enter the choice What you want to do: ");
@@ -55,7 +56,7 @@ public class AddressBookMain {
 
                 case 2: {
                     contactList.stream().forEach(name -> {
-                        System.out.println("\n" + name.getFirstname());
+                        System.out.println("\n" + name.getFirst_name());
                     });
                     System.out.print("\nwhich contact you want to edit:");
                     String edit_name = scan.next();
@@ -66,7 +67,7 @@ public class AddressBookMain {
 
                 case 3: {
                     contactList.stream().forEach(name -> {
-                        System.out.println("\n" + name.getFirstname());
+                        System.out.println("\n" + name.getFirst_name());
                     });
                     System.out.print("\nwhich contact you want to edit:");
                     String delete_name = scan.next();
@@ -110,7 +111,11 @@ public class AddressBookMain {
 
                 case 10: {
                     JsonFile.jsonWrite();
+                }
+                break;
 
+                case 11: {
+                    retrieveData();
                 }
                 break;
 
@@ -119,6 +124,12 @@ public class AddressBookMain {
             System.out.println("\n Do you want to continue:(y or n) ");
             ans = scan.next().charAt(0);
         } while (ans == 'y');
+    }
+
+    private static void retrieveData() {
+        String sql = "select * from contact";
+        List<ContactInfo> contactInfoList = AddressBookJDBC.retrieveData(sql);
+        System.out.println(contactInfoList);
     }
 
     private static void WriteCSVFile() throws CsvRequiredFieldEmptyException, CsvDataTypeMismatchException, IOException {
@@ -143,8 +154,8 @@ public class AddressBookMain {
                         .sorted(Comparator.comparing(Contact::getState))
                         .collect(Collectors.toList());
                 sorted_by_state.forEach(contact -> {
-                    System.out.println("\nFirstName - " + contact.getFirstname() +
-                            "\nLastname -  " + contact.getLastname() +
+                    System.out.println("\nFirstName - " + contact.getFirst_name() +
+                            "\nLastname -  " + contact.getLast_name() +
                             "\nAddress -  " + contact.getAddress() +
                             "\nCity -  " + contact.getCity() +
                             "\nState -  " + contact.getState() +
@@ -159,8 +170,8 @@ public class AddressBookMain {
                         .sorted(Comparator.comparing(Contact::getCity))
                         .collect(Collectors.toList());
                 sorted_by_state.forEach(contact -> {
-                    System.out.println("\nFirstName - " + contact.getFirstname() +
-                            "\nLastname -  " + contact.getLastname() +
+                    System.out.println("\nFirstName - " + contact.getFirst_name() +
+                            "\nLastname -  " + contact.getLast_name() +
                             "\nAddress -  " + contact.getAddress() +
                             "\nCity -  " + contact.getCity() +
                             "\nState -  " + contact.getState() +
@@ -175,8 +186,8 @@ public class AddressBookMain {
                         .sorted(Comparator.comparing(Contact::getZip))
                         .collect(Collectors.toList());
                 sorted_by_state.forEach(contact -> {
-                    System.out.println("\nFirstName - " + contact.getFirstname() +
-                            "\nLastname -  " + contact.getLastname() +
+                    System.out.println("\nFirstName - " + contact.getFirst_name() +
+                            "\nLastname -  " + contact.getLast_name() +
                             "\nAddress -  " + contact.getAddress() +
                             "\nCity -  " + contact.getCity() +
                             "\nState -  " + contact.getState() +
@@ -204,7 +215,7 @@ public class AddressBookMain {
         if (contactList.stream().anyMatch(search -> search.getState().equalsIgnoreCase(input) || search.getCity().equalsIgnoreCase(input))) {
             contactList.stream().filter(search -> search.getState().equalsIgnoreCase(input) || search.getCity().equalsIgnoreCase(input))
                     .sorted().forEach(contact -> {
-                        System.out.println("Contact person: " + contact.getFirstname());
+                        System.out.println("Contact person: " + contact.getFirst_name());
                     });
         } else {
             System.out.println("\nThere is no contact person");
@@ -235,9 +246,9 @@ public class AddressBookMain {
             first_name = function.get_firstname();
             present = function.check_duplicate(first_name);
         }
-        firstname = first_name;
+        AddressBookMain.first_name = first_name;
         System.out.print("\nEnter the Last name: ");
-        lastname = scan.next();
+        last_name = scan.next();
         System.out.print("\nEnter the Address: ");
         address = scan.next();
         System.out.print("\nEnter the city: ");
@@ -251,18 +262,18 @@ public class AddressBookMain {
         System.out.print("\nEnter the EmailID: ");
         email = scan.next();
 
-        contactList.add(new Contact(firstname, lastname, address, city, state, zip, phone_number, email));
-        AddressBook.book.put(firstname, new Contact(firstname, lastname, address, city, state, zip, phone_number, email));
+        contactList.add(new Contact(AddressBookMain.first_name, last_name, address, city, state, zip, phone_number, email));
+        AddressBook.book.put(AddressBookMain.first_name, new Contact(AddressBookMain.first_name, last_name, address, city, state, zip, phone_number, email));
     }
 
     private String get_firstname() {
         System.out.print("\nEnter the First name: ");
-        firstname = scan.next();
-        return firstname;
+        first_name = scan.next();
+        return first_name;
     }
 
     private boolean check_duplicate(String first_name) {
-        return contactList.stream().anyMatch(name -> name.getFirstname().equals(first_name));
+        return contactList.stream().anyMatch(name -> name.getFirst_name().equals(first_name));
     }
 
     private static void edit_contact_to_list(String name) {
@@ -274,9 +285,9 @@ public class AddressBookMain {
             first_name = function.get_firstname();
             present = function.check_duplicate(first_name);
         }
-        firstname = first_name;
+        AddressBookMain.first_name = first_name;
         System.out.print("\nEnter the Last name: ");
-        lastname = scan.next();
+        last_name = scan.next();
         System.out.print("\nEnter the Address: ");
         address = scan.next();
         System.out.print("\nEnter the city: ");
@@ -292,7 +303,7 @@ public class AddressBookMain {
 
         int index = (contactList.indexOf(AddressBook.book.get(name))) + 1;
         AddressBook.book.remove(name);
-        contactList.set(index, new Contact(firstname, lastname, address, city, state, zip, phone_number, email));
-        AddressBook.book.put(firstname, new Contact(firstname, lastname, address, city, state, zip, phone_number, email));
+        contactList.set(index, new Contact(AddressBookMain.first_name, last_name, address, city, state, zip, phone_number, email));
+        AddressBook.book.put(AddressBookMain.first_name, new Contact(AddressBookMain.first_name, last_name, address, city, state, zip, phone_number, email));
     }
 }

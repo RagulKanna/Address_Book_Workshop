@@ -88,8 +88,8 @@ public class CSVUser {
     @Override
     public String toString() {
         return "CSVUser{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                "first_name='" + firstname + '\'' +
+                ", last_name='" + lastname + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +

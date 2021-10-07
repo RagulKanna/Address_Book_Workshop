@@ -1,43 +1,43 @@
 package com.AddressBook;
 
 public class Contact {
-    private String firstname;
-    private String lastname;
+    private String first_name;
+    private String last_name;
     private String address;
     private String city;
     private String state;
     private int zip;
-    private long phonenumber;
+    private long phone_number;
     private String email;
 
 
     Contact(String firstname, String lastname, String address, String city, String state, int zip, long phonenumber, String email) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.first_name = firstname;
+        this.last_name = lastname;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.phonenumber = phonenumber;
+        this.phone_number = phonenumber;
         this.email = email;
     }
 
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirst_name() {
+        return first_name;
     }
 
     public String setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.first_name = firstname;
         return firstname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLast_name() {
+        return last_name;
     }
 
     public String setLastname(String lastname) {
-        this.lastname = lastname;
+        this.last_name = lastname;
         return lastname;
     }
 
@@ -77,12 +77,12 @@ public class Contact {
         return zip;
     }
 
-    public long getPhonenumber() {
-        return phonenumber;
+    public long getPhone_number() {
+        return phone_number;
     }
 
     public long setPhonenumber(long phonenumber) {
-        this.phonenumber = phonenumber;
+        this.phone_number = phonenumber;
         return phonenumber;
     }
 
@@ -98,13 +98,13 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip=" + zip +
-                ", phonenumber=" + phonenumber +
+                ", phone_number=" + phone_number +
                 ", email='" + email + '\'' +
                 '}';
     }
