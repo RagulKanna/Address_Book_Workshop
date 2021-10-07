@@ -46,4 +46,17 @@ public class AddressBookJDBC {
         return contactInfoList;
     }
 
+    public static void updateData(String first_name, String email, String sql) {
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, first_name);
+            int result = preparedStatement.executeUpdate();
+            if (result == 1) {
+                System.out.println("query updated");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

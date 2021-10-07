@@ -11,14 +11,14 @@ public class Contact {
     private String email;
 
 
-    Contact(String firstname, String lastname, String address, String city, String state, int zip, long phonenumber, String email) {
+    Contact(String firstname, String lastname, String address, String city, String state, int zip, long phone_number, String email) {
         this.first_name = firstname;
         this.last_name = lastname;
         this.address = address;
         this.city = city;
         this.state = state;
         this.zip = zip;
-        this.phone_number = phonenumber;
+        this.phone_number = phone_number;
         this.email = email;
     }
 
@@ -81,9 +81,9 @@ public class Contact {
         return phone_number;
     }
 
-    public long setPhonenumber(long phonenumber) {
-        this.phone_number = phonenumber;
-        return phonenumber;
+    public long setPhone_number(long phone_number) {
+        this.phone_number = phone_number;
+        return phone_number;
     }
 
     public String getEmail() {
