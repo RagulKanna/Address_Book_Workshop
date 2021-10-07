@@ -9,6 +9,7 @@ public class ContactInfo {
     private int zip;
     private long phone_number;
     private String email;
+    private String date;
 
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
@@ -74,9 +75,17 @@ public class ContactInfo {
         return email;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
-        return "ContactInfo{" +
+        return "\nContactInfo{" +
                 "first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", address='" + address + '\'' +
@@ -85,6 +94,7 @@ public class ContactInfo {
                 ", zip=" + zip +
                 ", phone_number=" + phone_number +
                 ", email='" + email + '\'' +
-                '}' + "\n";
+                ", date='" + date + '\'' +
+                '}';
     }
 }
